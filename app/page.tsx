@@ -1,103 +1,121 @@
-import Image from "next/image";
+"use client";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Confetti from "react-confetti";
 
-export default function Home() {
+const photos = [
+  "/placeholder.jpg",
+  "/placeholder.jpg",
+  "/placeholder.jpg",
+  "/placeholder.jpg",
+];
+
+function CakeSVG({ blownOut }: { blownOut: boolean }) {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <svg
+      viewBox="0 0 400 400"
+      className="w-[550px] h-[400px]"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g>
+        <rect x="50" y="270" width="300" height="50" rx="12" fill="#065f46" />
+        <rect x="70" y="210" width="260" height="50" rx="12" fill="#10b981" />
+        <rect x="90" y="120" width="220" height="80" rx="12" fill="#bbf7d0" />
+      </g>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+      <image
+        href="/sps-logo.png"
+        x="160"
+        y="110"
+        width="80"
+        height="100"
+        preserveAspectRatio="xMidYMid meet"
+      />
+
+      {[190, 200, 210].map((x, i) => (
+        <g key={`candle-${i}`}>
+          <rect x={x} y={100} width={6} height={20} fill="#facc15" rx={2} />
+          {!blownOut && (
+            <motion.ellipse
+              cx={x + 3}
+              cy={95}
+              rx={4}
+              ry={6}
+              fill="#f97316"
+              animate={{ scaleY: [1, 1.5, 1] }}
+              transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.2 }}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+          )}
+        </g>
+      ))}
+    </svg>
+  );
+}
+
+export default function HomePage() {
+  const [blownOut, setBlownOut] = useState(false);
+  const [modalImg, setModalImg] = useState<string | null>(null);
+
+  return (
+    <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold mb-6 text-center">
+        IEEE SPS Day Celebration 🎉
+      </h1>
+
+      <div className="cursor-pointer" onClick={() => setBlownOut(true)}>
+        <CakeSVG blownOut={blownOut} />
+      </div>
+
+      {blownOut && (
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
+      )}
+
+      <AnimatePresence>
+        {blownOut && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0 }}
+            className="flex flex-wrap items-center justify-center gap-4 mt-10"
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            {photos.map((src, i) => (
+              <motion.img
+                key={src}
+                src={src}
+                alt={`Celebration ${i + 1}`}
+                className="max-h-[150px] w-auto object-contain rounded-lg shadow-lg cursor-pointer"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: i * 0.2 }}
+                onClick={() => setModalImg(src)}
+              />
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Modal */}
+      <AnimatePresence>
+        {modalImg && (
+          <motion.div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50"
+            onClick={() => setModalImg(null)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.img
+              src={modalImg}
+              alt="Enlarged"
+              className="max-w-[90%] max-h-[90%] rounded-lg shadow-2xl"
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.5, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </main>
   );
 }
