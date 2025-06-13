@@ -59,7 +59,7 @@ export default function HomePage() {
   return (
     <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-4">
       <h1 className="text-4xl font-bold mb-6 text-center">
-        IEEE SPS Day Celebration 🎉
+        🎉 IEEE SPS Day Celebration 🎉
       </h1>
 
       <div className="cursor-pointer" onClick={() => setBlownOut(true)}>
