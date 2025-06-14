@@ -21,7 +21,9 @@ function CakeSVG({ blownOut }: { blownOut: boolean }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 1 }}
       viewBox="0 0 400 400"
-      className="w-[550px] h-[400px]"
+      className={`${
+        blownOut ? "animate-none" : "animate-subtle-bounce"
+      } w-[550px] h-[400px] `}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
