@@ -4,10 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
 
 const photos = [
-  "/placeholder.jpg",
-  "/placeholder.jpg",
-  "/placeholder.jpg",
-  "/placeholder.jpg",
+  "/photos/photo1.jpg",
+  "/photos/photo2.jpg",
+  "/photos/photo3.jpg",
+  "/photos/photo4.jpg",
+  "/photos/photo5.jpg",
+  "/photos/photo6.jpg",
+  "/photos/photo7.jpg",
+  "/photos/photo8.jpg",
 ];
 
 function CakeSVG({ blownOut }: { blownOut: boolean }) {
@@ -57,7 +61,7 @@ export default function HomePage() {
   const [modalImg, setModalImg] = useState<string | null>(null);
 
   return (
-    <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-4">
+    <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-10">
       <h1 className="text-4xl font-bold mb-6 text-center">
         🎉 IEEE SPS Day Celebration 🎉
       </h1>
@@ -76,14 +80,14 @@ export default function HomePage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="flex flex-wrap items-center justify-center gap-4 mt-10"
+            className="grid grid-cols-1 md:grid-cols-4 items-center justify-center gap-4 mt-10"
           >
             {photos.map((src, i) => (
               <motion.img
                 key={src}
                 src={src}
                 alt={`Celebration ${i + 1}`}
-                className="max-h-[150px] w-auto object-contain rounded-lg shadow-lg cursor-pointer"
+                className="h-auto w-auto object-contain rounded-lg shadow-lg cursor-pointer"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: i * 0.2 }}
