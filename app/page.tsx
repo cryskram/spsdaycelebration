@@ -16,21 +16,24 @@ const photos = [
 
 function CakeSVG({ blownOut }: { blownOut: boolean }) {
   return (
-    <svg
+    <motion.svg
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
       viewBox="0 0 400 400"
       className="w-[550px] h-[400px]"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
-        <rect x="50" y="270" width="300" height="50" rx="12" fill="#065f46" />
-        <rect x="70" y="210" width="260" height="50" rx="12" fill="#10b981" />
-        <rect x="90" y="120" width="220" height="80" rx="12" fill="#bbf7d0" />
+        <rect x="50" y="290" width="300" height="50" rx="12" fill="#065f46" />
+        <rect x="70" y="230" width="260" height="50" rx="12" fill="#10b981" />
+        <rect x="90" y="140" width="220" height="80" rx="12" fill="#bbf7d0" />
       </g>
 
       <image
         href="/sps-logo.png"
         x="160"
-        y="110"
+        y="130"
         width="80"
         height="100"
         preserveAspectRatio="xMidYMid meet"
@@ -38,7 +41,7 @@ function CakeSVG({ blownOut }: { blownOut: boolean }) {
 
       {[190, 200, 210].map((x, i) => (
         <g key={`candle-${i}`}>
-          <rect x={x} y={100} width={6} height={20} fill="#facc15" rx={2} />
+          <rect x={x} y={100} width={6} height={40} fill="#facc15" rx={2} />
           {!blownOut && (
             <motion.ellipse
               cx={x + 3}
@@ -52,7 +55,7 @@ function CakeSVG({ blownOut }: { blownOut: boolean }) {
           )}
         </g>
       ))}
-    </svg>
+    </motion.svg>
   );
 }
 
@@ -71,7 +74,7 @@ export default function HomePage() {
       </div>
 
       {blownOut && (
-        <Confetti width={window.innerWidth} height={window.innerHeight} />
+        <Confetti width={window.innerWidth} height={window.innerHeight / 2} />
       )}
 
       <AnimatePresence>
@@ -90,7 +93,7 @@ export default function HomePage() {
                 className="h-auto w-auto object-contain rounded-lg shadow-lg cursor-pointer"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.2 }}
+                transition={{ delay: i * 0.4 }}
                 onClick={() => setModalImg(src)}
               />
             ))}
