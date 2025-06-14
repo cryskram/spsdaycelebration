@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Confetti from "react-confetti";
+import Image from "next/image";
 
 const photos = [
   "/photos/photo1.jpg",
@@ -67,6 +68,14 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-10">
+      <Image
+        src="/spsday.png"
+        width={400}
+        height={400}
+        alt="sps day"
+        className="mb-10"
+      />
+
       <div className="flex flex-col items-center justify-center">
         <h1 className="text-2xl md:text-4xl mb-6 text-center">
           IEEE SPS Bangalore Chapter Celebrates
