@@ -65,9 +65,12 @@ export default function HomePage() {
 
   return (
     <main className="min-h-screen bg-green-950 text-white flex flex-col items-center justify-center p-10">
-      <h1 className="text-4xl font-bold mb-6 text-center">
-        🎉 IEEE SPS Day Celebration 🎉
-      </h1>
+      <div className="flex flex-col items-center justify-center">
+        <h1 className="text-2xl md:text-4xl mb-6 text-center">
+          IEEE SPS Bangalore Chapter Celebrates
+        </h1>
+        <h1 className="text-xl md:text-3xl font-bold">🎉 IEEE SPS Day 🎉</h1>
+      </div>
 
       <div className="cursor-pointer" onClick={() => setBlownOut(true)}>
         <CakeSVG blownOut={blownOut} />
